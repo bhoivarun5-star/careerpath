@@ -1,0 +1,64 @@
+{% extends 'studentapp/base.html' %}
+{% block title %}Learning Resources – CareerPath{% endblock %}
+
+{% block content %}
+<div class="dashboard-page">
+    <!-- Sidebar (Same as dashboard) -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon-sm"><i class="fas fa-rocket"></i></div>
+            <span>CareerPath</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="{% url 'dashboard' %}" class="nav-item">
+                <i class="fas fa-house"></i><span>Dashboard</span>
+            </a>
+            <a href="{% url 'roadmap' %}" class="nav-item">
+                <i class="fas fa-road"></i><span>Roadmap</span>
+            </a>
+            <a href="{% url 'resources' %}" class="nav-item active">
+                <i class="fas fa-book-open"></i><span>Resources</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-chart-line"></i><span>Progress</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-trophy"></i><span>Achievements</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-users"></i><span>Community</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="/admin/" class="nav-item" target="_blank">
+                <i class="fas fa-shield-halved"></i><span>Admin Panel</span>
+            </a>
+            <a href="{% url 'logout' %}" class="nav-item nav-logout">
+                <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <div class="dash-header">
+            <div class="dash-greeting">
+                <h1>Explore <span class="gradient-text">Career Paths</span></h1>
+                <p>Select a career to generate a personalized learning curriculum and resources.</p>
+            </div>
+        </div>
+
+        <div class="resources-grid">
+            {% for career in careers %}
+            <a href="{% url 'resource_detail' career.slug %}" class="career-card">
+                <div class="career-icon">
+                    <i class="fas {{ career.icon }}"></i>
+                </div>
+                <h3>{{ career.name }}</h3>
+                <p>Generate curriculum & resources <i class="fas fa-arrow-right"></i></p>
+            </a>
+            {% endfor %}
+        </div>
+    </main>
+</div>
+{% endblock %}
